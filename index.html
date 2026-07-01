@@ -157,6 +157,8 @@
   .rev .ph{position:absolute; top:8px; right:8px; font-size:9.5px; font-weight:700; padding:2px 7px; border-radius:20px;}
   .ph-e{background:#e2f0ec; color:var(--accent2);} .ph-l{background:#efe6cf; color:#8a6d1a;}
   .revnote{border-left:4px solid var(--accent2); background:var(--soft); padding:8px 12px; border-radius:0 8px 8px 0; font-size:12.5px; margin:6px 0 0;}
+  table.risk th, table.risk td{font-size:10.5px; padding:2px 7px; line-height:1.2;}
+  table.risk thead th{font-size:10.5px;}
 
   .propose{background:var(--navy); color:#fff; border-radius:10px; padding:14px 18px; margin:8px 0;}
   .propose h3{color:#fff; font-size:16px; margin-bottom:6px;}
@@ -165,7 +167,7 @@
 
   @media print{
     body{background:#fff;}
-    .page{margin:0; box-shadow:none; width:auto; min-height:auto; page-break-after:always;}
+    .page{margin:0; box-shadow:none; width:210mm; height:297mm; min-height:0; overflow:hidden; page-break-after:always;}
     .page:last-child{page-break-after:auto;}
   }
   @page{size:A4; margin:0;}
@@ -352,9 +354,12 @@
 
   <div class="theme"><div class="adv"><b>๘ · งบประมาณและการสนับสนุนของผู้บริหาร</b> — ระดมทุนเป็นระยะ และผู้บริหารต้องเห็นชอบร่วมกัน</div><div class="resp"><b>แนวทางศูนย์:</b> วางแผนระดมทุนหลายแหล่งเป็นระยะ และเสนอรายงานฉบับนี้เพื่อขอความเห็นชอบในหลักการจากสภามหาวิทยาลัย</div></div>
 
-  <div class="cap small muted" style="text-align:center; margin-bottom:6px;"><b>รูปที่ ๔</b> · การสังเคราะห์ข้อเสนอแนะสู่แนวทางการปรับปรุงของศูนย์ ARIC</div>
+  <div class="cap small muted" style="text-align:center;"><b>รูปที่ ๔</b> · การสังเคราะห์ข้อเสนอแนะสู่แนวทางการปรับปรุงของศูนย์ ARIC</div>
+</section>
 
-  <div class="sec-h" style="margin-top:10px;"><div class="no" style="background:var(--accent2)">฿</div><div><h3 style="font-size:16px;">แนวทางการหารายได้ของศูนย์</h3><div class="en">REVENUE MODEL · ตอบข้อหารือ ศ.ดร.วรภัทร โตธนะเกษม</div></div></div>
+<!-- ===================== SEC 4b revenue ===================== -->
+<section class="page" data-pg><span class="pgnum">๖</span>
+  <div class="sec-h"><div class="no" style="background:var(--accent2)">฿</div><div><h2>แนวทางการหารายได้ของศูนย์</h2><div class="en">REVENUE MODEL · ตอบข้อหารือ ศ.ดร.วรภัทร โตธนะเกษม</div></div></div>
   <p class="small" style="margin-top:2px;">ศ.ดร.วรภัทร ตั้งคำถามถึงแผนสร้างรายได้ การต่อยอดเชิงพาณิชย์ และความคุ้มค่าที่จะสื่อสารต่อสภามหาวิทยาลัย
   ศูนย์จึงออกแบบแหล่งรายได้ <strong>๖ ทาง</strong> ที่เติบโตเป็นระยะ เพื่อค่อย ๆ ลดการพึ่งพางบประมาณภาครัฐ และมุ่งสู่การเลี้ยงตัวเองได้ในระยะยาว</p>
 
@@ -373,15 +378,14 @@
 </section>
 
 <!-- ===================== SEC 5 refined direction + risk ===================== -->
-<section class="page" data-pg><span class="pgnum">๖</span>
+<section class="page" data-pg><span class="pgnum">๗</span>
   <div class="sec-h"><div class="no">๕</div><div><h2>ทิศทางที่ปรับปรุงแล้ว และการบริหารความเสี่ยง</h2><div class="en">REFINED DIRECTION &amp; RISK</div></div></div>
 
   <div class="flag">
     <h4>จุดเน้นหลัก · “สุขภาพและสังคมสูงวัย”</h4>
-    <p class="small" style="margin:4px 0 0;">จากข้อเสนอแนะให้เลือกโดเมนที่ชัดเจน ศูนย์เลือกสุขภาพ การส่งเสริมสุขภาวะ (Wellness) และสังคมสูงวัยเป็นตัวชูโรง
-    โดยอาศัยความได้เปรียบของมหาวิทยาลัยที่มีระบบนิเวศด้านวิทยาศาสตร์สุขภาพครบถ้วน ทั้งสำนักวิชาแพทยศาสตร์ พยาบาลศาสตร์
-    วิทยาศาสตร์สุขภาพ ศูนย์ส่งเสริมสุขภาพและการแพทย์บูรณาการ และโรงพยาบาลของมหาวิทยาลัย ครอบคลุมทั้งการดูแลรักษา
-    การป้องกันโรค และการส่งเสริมสุขภาวะเชิงรุกสำหรับสังคมสูงวัย</p>
+    <p class="small" style="margin:4px 0 0;">ศูนย์เลือกสุขภาพ การส่งเสริมสุขภาวะ (Wellness) และสังคมสูงวัยเป็นตัวชูโรง โดยอาศัยความได้เปรียบของมหาวิทยาลัย
+    ที่มีระบบนิเวศด้านวิทยาศาสตร์สุขภาพครบถ้วน ทั้งสำนักวิชาแพทยศาสตร์ พยาบาลศาสตร์ วิทยาศาสตร์สุขภาพ ศูนย์ส่งเสริมสุขภาพ
+    และการแพทย์บูรณาการ และโรงพยาบาลของมหาวิทยาลัย ครอบคลุมทั้งการดูแลรักษา ป้องกันโรค และส่งเสริมสุขภาวะเชิงรุก</p>
   </div>
 
   <div class="kicker">โครงสร้าง ๔ กลุ่มงานหลัก และกำลังคน</div>
@@ -404,22 +408,22 @@
     <div class="w"><div class="yr">ปีที่ ๔–๕ (ระยะยาว)</div><b>ธุรกิจแยกส่วนและรายได้</b><span>ขยายสู่บริการหรือสตาร์ทอัพที่สร้างรายได้ และเกิดผลกระทบเชิงเศรษฐกิจและสังคมที่วัดได้</span></div>
   </div>
   <div class="revnote" style="border-left-color:var(--health);"><strong>ผลงานระยะสั้นด้านการประชาสัมพันธ์:</strong> การลงนามความร่วมมือกับพันธมิตรผู้ผลิตในจีน (ร่วมวิจัย ร่วมผลิต และจำหน่าย)
-  ถือเป็นผลงานระยะสั้นเชิงประชาสัมพันธ์ที่สร้างการรับรู้และภาพจำให้ศูนย์เป็นที่รู้จักได้อย่างรวดเร็ว ตอบข้อเสนอแนะที่ให้เร่งสร้างแบรนด์และทำให้สาธารณะรู้จักศูนย์โดยเร็ว</div>
+  เป็นผลงานเชิงประชาสัมพันธ์ที่สร้างการรับรู้และภาพจำให้ศูนย์เป็นที่รู้จักอย่างรวดเร็ว ตอบข้อเสนอแนะเรื่องการเร่งสร้างแบรนด์</div>
 
-  <div class="kicker" style="margin-top:6px;">การบริหารความเสี่ยง</div>
-  <table>
-    <thead><tr><th style="width:34%">ความเสี่ยง</th><th>แนวทางรองรับ</th></tr></thead>
+  <div class="kicker" style="margin-top:4px;">การบริหารความเสี่ยง</div>
+  <table class="risk">
+    <thead><tr><th style="width:36%">ความเสี่ยง</th><th>แนวทางรองรับ</th></tr></thead>
     <tbody>
-      <tr><td>สรรหาบุคลากรได้ไม่ตามแผน</td><td>ใช้ทุนการศึกษาสร้างคนภายใน เครือข่ายสถาบันพันธมิตร และจ้างผู้เชี่ยวชาญเฉพาะโครงการ</td></tr>
-      <tr><td>ผลงานหรือโครงการไม่สำเร็จตามเป้า</td><td>เริ่มจากผลงานระยะสั้นที่ทำได้จริง ทบทวนเป็นระยะ และจัดลำดับความสำคัญให้ชัดเจน</td></tr>
-      <tr><td>งบประมาณไม่เป็นไปตามแผน</td><td>ระดมทุนหลายแหล่งเป็นระยะ ทั้งกระทรวงดิจิทัลฯ งบแผ่นดิน และภาคเอกชน เพื่อลดการพึ่งพาแหล่งเดียว</td></tr>
-      <tr><td>เทคโนโลยีเปลี่ยนเร็วกว่าวงรอบสร้างศูนย์</td><td>วางบทบาทที่ชั้นการประยุกต์ซึ่งปรับตามเทคโนโลยีฐานได้ และ Physical AI เป็นแนวโน้มระยะยาว</td></tr>
+      <tr><td>สรรหาบุคลากรได้ไม่ตามแผน</td><td>สร้างคนภายในด้วยทุน ใช้เครือข่ายพันธมิตร จ้างผู้เชี่ยวชาญตามโครงการ</td></tr>
+      <tr><td>ผลงาน/โครงการไม่สำเร็จตามเป้า</td><td>เริ่มจากผลงานระยะสั้นที่ทำได้จริง ทบทวนและจัดลำดับความสำคัญเป็นระยะ</td></tr>
+      <tr><td>งบประมาณไม่เป็นไปตามแผน</td><td>ระดมทุนหลายแหล่งเป็นระยะ ทั้งภาครัฐและเอกชน ลดการพึ่งพาแหล่งเดียว</td></tr>
+      <tr><td>เทคโนโลยีเปลี่ยนเร็วกว่าวงรอบศูนย์</td><td>วางบทบาทที่ชั้นการประยุกต์ที่ปรับตามเทคโนโลยีฐานได้ต่อเนื่อง</td></tr>
     </tbody>
   </table>
 </section>
 
 <!-- ===================== SEC 6 proposal + appendix ===================== -->
-<section class="page" data-pg><span class="pgnum">๗</span>
+<section class="page" data-pg><span class="pgnum">๘</span>
   <div class="sec-h"><div class="no">๖</div><div><h2>ข้อเสนอเพื่อพิจารณา</h2><div class="en">PROPOSAL FOR CONSIDERATION</div></div></div>
 
   <div class="propose">
