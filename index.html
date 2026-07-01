@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รายงานผลการหารือผู้ทรงคุณวุฒิ — โครงการจัดตั้งศูนย์ ARIC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f2544; --navy2:#1b3a63; --blue:#1f5fa8; --accent:#c8992e;
+    --accent2:#0e7c66; --health:#b5324a; --ink:#1c2531; --muted:#5c6b7a;
+    --line:#d7dee6; --soft:#f4f7fa; --soft2:#eef3f8; --chip:#e8eef5;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{
+    font-family:'Sarabun',sans-serif; color:var(--ink);
+    margin:0; background:#8894a3; line-height:1.55; font-size:15px;
+  }
+  .page{
+    width:210mm; min-height:297mm; padding:18mm 17mm 16mm; margin:8mm auto;
+    background:#fff; box-shadow:0 3px 16px rgba(0,0,0,.25); position:relative;
+  }
+  .page::after{
+    content:"สำนักวิชาเทคโนโลยีดิจิทัลประยุกต์ · มหาวิทยาลัยแม่ฟ้าหลวง";
+    position:absolute; left:17mm; right:17mm; bottom:8mm;
+    font-size:10.5px; color:var(--muted); border-top:1px solid var(--line);
+    padding-top:3mm; display:flex; justify-content:space-between;
+  }
+  .page[data-pg]::before{
+    content:"ARIC · รายงานผลการหารือผู้ทรงคุณวุฒิ";
+    position:absolute; left:17mm; top:9mm; font-size:10px; color:var(--muted);
+    letter-spacing:.5px;
+  }
+  .pgnum{position:absolute; right:17mm; top:9mm; font-size:10px; color:var(--muted);}
+  h1,h2,h3,h4{margin:0; font-weight:700; color:var(--navy); line-height:1.25;}
+  p{margin:.4em 0;}
+  .small{font-size:13px;} .muted{color:var(--muted);}
+  strong{font-weight:700;}
+
+  /* ---- cover ---- */
+  .cover{background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 55%,#24507f 100%); color:#fff;}
+  .cover::after{color:#9fb4cf; border-top-color:rgba(255,255,255,.18);}
+  .cover[data-pg]::before{color:#9fb4cf;}
+  .cover .pgnum{color:#9fb4cf;}
+  .crest{font-size:12px; letter-spacing:3px; color:#cde0f5; font-weight:500;}
+  .cover h1{color:#fff; font-size:33px; margin-top:16mm; line-height:1.3;}
+  .cover .en{color:#a9c4e3; font-size:15px; letter-spacing:2px; margin-top:6px; font-weight:400;}
+  .cover .rule{height:3px; width:70px; background:var(--accent); margin:14px 0 20px;}
+  .cover .lead{color:#e4edf7; font-size:16px; max-width:150mm;}
+  .cover .metabox{
+    margin-top:22mm; border:1px solid rgba(255,255,255,.25); border-radius:10px;
+    padding:16px 20px; background:rgba(255,255,255,.06); max-width:150mm;
+  }
+  .cover .metabox div{display:flex; gap:10px; padding:5px 0; font-size:14.5px; color:#e9f1fa;}
+  .cover .metabox b{min-width:120px; color:#a9c4e3; font-weight:500;}
+  .cover .badge{
+    display:inline-block; margin-top:2mm; background:var(--accent); color:#2a2000;
+    font-weight:700; padding:6px 16px; border-radius:30px; font-size:13.5px; letter-spacing:.5px;
+  }
+
+  /* ---- section chrome ---- */
+  .sec-h{display:flex; align-items:center; gap:12px; margin:0 0 8px;}
+  .sec-h .no{
+    background:var(--navy); color:#fff; font-weight:700; font-size:15px;
+    width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  .sec-h h2{font-size:19px;}
+  .sec-h .en{color:var(--muted); font-size:12px; font-weight:400; letter-spacing:1px;}
+  .kicker{color:var(--blue); font-weight:700; font-size:12.5px; letter-spacing:1.5px; text-transform:uppercase;}
+
+  .lede{border-left:4px solid var(--accent); background:var(--soft); padding:10px 14px; border-radius:0 8px 8px 0; margin:8px 0 12px;}
+
+  /* exec summary cards */
+  .findings{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0;}
+  .f-card{border:1px solid var(--line); border-radius:8px; padding:9px 12px; background:#fff;}
+  .f-card b{color:var(--navy); display:block; font-size:14px;}
+  .f-card span{font-size:13px; color:var(--muted);}
+
+  .quote{
+    border-left:4px solid var(--blue); background:var(--soft2);
+    padding:8px 14px; margin:10px 0; font-style:italic; color:var(--navy2); border-radius:0 8px 8px 0;
+  }
+  .quote small{display:block; font-style:normal; color:var(--muted); margin-top:3px;}
+
+  ul.tick{list-style:none; padding-left:0; margin:6px 0;}
+  ul.tick li{padding-left:22px; position:relative; margin:4px 0;}
+  ul.tick li::before{content:"▸"; color:var(--accent); position:absolute; left:4px; font-weight:700;}
+
+  table{border-collapse:collapse; width:100%; font-size:13px; margin:8px 0;}
+  th,td{border:1px solid var(--line); padding:6px 9px; vertical-align:top; text-align:left;}
+  thead th{background:var(--navy); color:#fff; font-weight:600; font-size:12.5px;}
+  tbody tr:nth-child(even){background:var(--soft);}
+  td .who{font-weight:700; color:var(--navy);}
+
+  /* timeline figure */
+  .fig{margin:12px 0; border:1px solid var(--line); border-radius:10px; padding:12px 14px 14px; background:var(--soft);}
+  .fig .cap{font-size:12px; color:var(--muted); margin-top:8px; text-align:center;}
+  .fig .cap b{color:var(--navy);}
+  .tl{display:flex; gap:0; position:relative; margin-top:4px;}
+  .tl .node{flex:1; text-align:center; position:relative; padding-top:26px;}
+  .tl .node::before{content:""; position:absolute; top:9px; left:0; right:0; height:3px; background:var(--line);}
+  .tl .node:first-child::before{left:50%;}
+  .tl .node:last-child::before{right:50%;}
+  .tl .dot{position:absolute; top:3px; left:50%; transform:translateX(-50%); width:15px; height:15px; border-radius:50%; background:var(--blue); border:3px solid #fff; box-shadow:0 0 0 2px var(--blue);}
+  .tl .node.k .dot{background:var(--accent); box-shadow:0 0 0 2px var(--accent);}
+  .tl .d{font-size:12px; font-weight:700; color:var(--navy);}
+  .tl .n{font-size:12px; color:var(--ink); margin-top:2px; line-height:1.3;}
+  .tl .r{font-size:10.5px; color:var(--muted);}
+
+  /* physical AI stack */
+  .stack{display:flex; flex-direction:column; gap:6px; margin-top:4px;}
+  .layer{display:flex; align-items:center; gap:12px; border-radius:8px; padding:9px 14px; color:#fff;}
+  .layer .lab{font-weight:700; font-size:13px; min-width:34px;}
+  .layer .body{flex:1;}
+  .layer .body b{font-size:14px; display:block;}
+  .layer .body span{font-size:11.5px; opacity:.9;}
+  .layer .tag{font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; background:rgba(255,255,255,.2);}
+  .L4{background:linear-gradient(90deg,var(--accent2),#12987d); outline:3px solid var(--accent); outline-offset:1px;}
+  .L3{background:var(--blue);} .L2{background:var(--navy2);} .L1{background:#5c6b7a;}
+  .stackmsg{text-align:center; font-weight:700; color:var(--navy); font-size:14.5px; margin:2px 0 6px;}
+
+  /* why now stats */
+  .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:10px 0;}
+  .stat{border:1px solid var(--line); border-radius:10px; padding:12px; text-align:center; background:#fff;}
+  .stat .big{font-size:26px; font-weight:700; color:var(--blue); line-height:1;}
+  .stat .lb{font-size:12px; color:var(--ink); margin-top:6px;}
+  .stat .src{font-size:10px; color:var(--muted); margin-top:4px; letter-spacing:.5px;}
+
+  /* theme synthesis */
+  .theme{border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:8px 12px; margin:7px 0; background:#fff;}
+  .theme .adv{font-size:13px;} .theme .adv b{color:var(--health);}
+  .theme .resp{font-size:13px; color:var(--navy2); margin-top:3px;}
+  .theme .resp b{color:var(--accent2);}
+
+  /* hubs */
+  .hubs{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:6px 0;}
+  .hub{border:1px solid var(--line); border-radius:8px; padding:9px 12px; background:var(--soft);}
+  .hub b{color:var(--navy); font-size:14px;} .hub span{font-size:12.5px; color:var(--muted);}
+  .flag{background:linear-gradient(135deg,#fff,#fbeef1); border:1px solid var(--health); border-radius:10px; padding:12px 14px; margin:8px 0;}
+  .flag h4{color:var(--health); font-size:15px;}
+  .win{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:6px 0;}
+  .win .w{border:1px solid var(--line); border-radius:8px; padding:9px; background:#fff;}
+  .win .w .yr{font-size:11px; font-weight:700; color:var(--accent); letter-spacing:.5px;}
+  .win .w b{font-size:13px; color:var(--navy); display:block; margin:2px 0;}
+  .win .w span{font-size:12px; color:var(--muted);}
+
+  /* revenue model */
+  .revgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:6px 0;}
+  .rev{border:1px solid var(--line); border-top:3px solid var(--accent2); border-radius:8px; padding:9px 12px; background:#fff; position:relative;}
+  .rev .rn{font-size:11px; font-weight:700; color:var(--accent2); letter-spacing:.5px;}
+  .rev b{display:block; font-size:13.5px; color:var(--navy); margin:2px 0;}
+  .rev span{font-size:12px; color:var(--muted);}
+  .rev .ph{position:absolute; top:8px; right:8px; font-size:9.5px; font-weight:700; padding:2px 7px; border-radius:20px;}
+  .ph-e{background:#e2f0ec; color:var(--accent2);} .ph-l{background:#efe6cf; color:#8a6d1a;}
+  .revnote{border-left:4px solid var(--accent2); background:var(--soft); padding:8px 12px; border-radius:0 8px 8px 0; font-size:12.5px; margin:6px 0 0;}
+
+  .propose{background:var(--navy); color:#fff; border-radius:10px; padding:14px 18px; margin:8px 0;}
+  .propose h3{color:#fff; font-size:16px; margin-bottom:6px;}
+  .propose ol{margin:6px 0 0; padding-left:20px;} .propose li{margin:5px 0; font-size:13.5px;}
+  .propose ol li::marker{color:var(--accent); font-weight:700;}
+
+  @media print{
+    body{background:#fff;}
+    .page{margin:0; box-shadow:none; width:auto; min-height:auto; page-break-after:always;}
+    .page:last-child{page-break-after:auto;}
+  }
+  @page{size:A4; margin:0;}
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section class="page cover">
+  <div class="crest">มหาวิทยาลัยแม่ฟ้าหลวง · MAE FAH LUANG UNIVERSITY</div>
+  <div class="small" style="color:#cde0f5; margin-top:2px;">สำนักวิชาเทคโนโลยีดิจิทัลประยุกต์ (School of Applied Digital Technology)</div>
+
+  <h1>รายงานผลการหารือผู้ทรงคุณวุฒิ<br>ต่อการจัดตั้งศูนย์นวัตกรรมปัญญาประดิษฐ์และหุ่นยนต์</h1>
+  <div class="en">AI &amp; ROBOTICS INNOVATION CENTER (ARIC) — ADVISORY CONSULTATION REPORT</div>
+  <div class="rule"></div>
+  <p class="lead">รายงานสรุปผลการเข้าหารือผู้ทรงคุณวุฒิและที่ปรึกษาสภามหาวิทยาลัย ๔ ท่าน
+  ตามข้อสั่งการของนายกสภามหาวิทยาลัย พร้อมทิศทางที่ปรับปรุงแล้วและข้อเสนอเพื่อพิจารณา</p>
+
+  <div class="badge">เสนอเพื่อโปรดพิจารณาให้ความเห็นชอบในหลักการ</div>
+
+  <div class="metabox">
+    <div><b>โครงการ</b><span>โครงการจัดตั้งศูนย์นวัตกรรมปัญญาประดิษฐ์และหุ่นยนต์ มหาวิทยาลัยแม่ฟ้าหลวง</span></div>
+    <div><b>ระยะเวลา</b><span>พ.ศ. ๒๕๗๐ – ๒๕๗๔ (ลงทุนปีที่ ๑ · ดำเนินงานต่อเนื่อง ๕ ปี)</span></div>
+    <div><b>จัดทำโดย</b><span>สำนักวิชาเทคโนโลยีดิจิทัลประยุกต์ (ADT)</span></div>
+    <div><b>เสนอต่อ</b><span>อธิการบดี และสภามหาวิทยาลัยแม่ฟ้าหลวง</span></div>
+    <div><b>วันที่</b><span>กรกฎาคม ๒๕๖๙</span></div>
+  </div>
+</section>
+
+<!-- ===================== EXEC SUMMARY ===================== -->
+<section class="page" data-pg><span class="pgnum">๑</span>
+  <div class="kicker">บทสรุปผู้บริหาร · Executive Summary</div>
+  <h2 style="font-size:20px; margin:4px 0 8px;">ผู้ทรงคุณวุฒิทั้ง ๔ ท่าน เห็นพ้องให้เดินหน้าจัดตั้งศูนย์ ARIC</h2>
+
+  <p>ตามที่นายกสภามหาวิทยาลัยได้มอบหมายให้สำนักวิชาเทคโนโลยีดิจิทัลประยุกต์
+  เข้ารับฟังข้อคิดเห็นเชิงนโยบายจากผู้ทรงคุณวุฒิที่มีความเชี่ยวชาญสูง ก่อนการพิจารณาจัดตั้งศูนย์ฯ
+  คณะผู้บริหารได้เข้าหารือผู้ทรงคุณวุฒิ ๔ ท่าน ระหว่างวันที่ ๘–๒๕ มิถุนายน ๒๕๖๙ โดยใช้เอกสารนำเสนอ
+  แนวคิดการจัดตั้งศูนย์เป็นหลักในการหารือ ผลการหารือสรุปได้ว่า <strong>ผู้ทรงคุณวุฒิทุกท่านสนับสนุนให้มหาวิทยาลัย
+  จัดตั้งศูนย์ ARIC</strong> โดยเห็นว่าเทคโนโลยี AI และหุ่นยนต์ (Physical AI) เป็นคลื่นเทคโนโลยีที่กำลังมาถึง
+  และมหาวิทยาลัยควรริเริ่มอย่างเป็นระบบตั้งแต่บัดนี้ พร้อมทั้งได้ให้ข้อเสนอแนะเชิงลึกเพื่อให้การจัดตั้งประสบผลสำเร็จ</p>
+
+  <div class="quote">“ต้องริเริ่มตั้งศูนย์ AI and Robotics (Physical AI) ได้แล้ว เพราะเทคโนโลยีนี้กำลังมาและจะถูกพัฒนาเพื่อใช้งานในอนาคต … ทีมและมหาวิทยาลัยต้องฝันให้ใหญ่เข้าไว้”
+  <small>— สรุปข้อเสนอแนะร่วมของผู้ทรงคุณวุฒิ</small></div>
+
+  <div class="kicker" style="margin-top:6px;">๕ ข้อค้นพบหลักจากการหารือ</div>
+  <div class="findings">
+    <div class="f-card"><b>๑ · เลือกจุดยืนให้ชัดเจน</b><span>อย่ากว้างเกินไป — กำหนดจุดเน้นหลักและกลุ่มเทคโนโลยีที่ชัด เพื่อสร้างเอกลักษณ์และภาพจำ</span></div>
+    <div class="f-card"><b>๒ · เน้นชั้นการประยุกต์</b><span>ไทยแข่งฮาร์ดแวร์กับจีนไม่ได้ — มูลค่าอยู่ที่ “ชั้น application” ที่ทำให้หุ่นยนต์ใช้งานได้จริงในบริบทไทย</span></div>
+    <div class="f-card"><b>๓ · สร้างผลงานระยะสั้นให้เร็ว</b><span>ต้องมีผลงานที่จับต้องได้ภายใน ๑–๒ ปี เพื่อพิสูจน์ตัวเองและสร้างการยอมรับ</span></div>
+    <div class="f-card"><b>๔ · วิจัยที่ใช้ได้จริง</b><span>มุ่งผลิตภัณฑ์ สิทธิบัตร และรายได้ ไม่ใช่การตีพิมพ์เพียงอย่างเดียว</span></div>
+    <div class="f-card"><b>๕ · คน–เงิน–ความเสี่ยง</b><span>สร้างระบบนิเวศกำลังคน ระดมทุนหลายแหล่งเป็นระยะ และมีแผนบริหารความเสี่ยงชัดเจน</span></div>
+    <div class="f-card" style="border-color:var(--health); background:#fbeef1;"><b style="color:var(--health)">ทิศทางที่ปรับแล้ว</b><span>ศูนย์วางตัวเป็น <b>“ผู้พัฒนาชั้นการประยุกต์ของ Physical AI ในบริบทไทย”</b> โดยมี <b>สุขภาพและสังคมสูงวัย</b> เป็นจุดเน้นหลัก</span></div>
+  </div>
+
+  <p class="small muted">รายงานฉบับนี้ประกอบด้วย ๖ ส่วน: (๑) ที่มาและกระบวนการ · (๒) สาระที่นำเสนอต่อผู้ทรงคุณวุฒิ ·
+  (๓) สรุปความเห็นรายท่าน · (๔) การสังเคราะห์ข้อเสนอแนะเป็น ๘ ประเด็น · (๕) ทิศทางที่ปรับปรุงแล้วและการบริหารความเสี่ยง ·
+  (๖) ข้อเสนอเพื่อพิจารณา พร้อมภาคผนวกสรุปคำถาม–ข้อเสนอแนะรายท่าน</p>
+</section>
+
+<!-- ===================== SEC 1 + 2 ===================== -->
+<section class="page" data-pg><span class="pgnum">๒</span>
+  <div class="sec-h"><div class="no">๑</div><div><h2>ที่มาและกระบวนการหารือ</h2><div class="en">BACKGROUND &amp; PROCESS</div></div></div>
+  <p>สืบเนื่องจากนโยบายของมหาวิทยาลัยที่มุ่งเน้นเทคโนโลยีดิจิทัลและนวัตกรรมในระดับสากล สำนักวิชาเทคโนโลยีดิจิทัลประยุกต์
+  ได้เสนอแนวคิดการจัดตั้ง “ศูนย์นวัตกรรมปัญญาประดิษฐ์และหุ่นยนต์ (ARIC)” เป็นกลไกหลักในการขับเคลื่อนยุทธศาสตร์ดังกล่าว
+  นายกสภามหาวิทยาลัยจึงมอบหมายให้สำนักวิชาฯ เข้าพบผู้ทรงคุณวุฒิที่มีประสบการณ์สูง เพื่อรับฟังข้อคิดเห็นและข้อเสนอแนะ
+  เชิงนโยบาย ก่อนการพิจารณาจัดตั้งศูนย์ฯ อย่างเป็นทางการ</p>
+
+  <div class="fig">
+    <div class="tl">
+      <div class="node k"><div class="dot"></div><div class="d">๘ มิ.ย.</div><div class="n">รศ.ยืน ภู่วรวรรณ</div><div class="r">๑๐.๐๐–๑๒.๐๐</div></div>
+      <div class="node"><div class="dot"></div><div class="d">๒๒ มิ.ย.</div><div class="n">เดินทาง<br>เชียงราย สู่ กรุงเทพฯ</div><div class="r">๑๓.๐๐–๑๖.๐๐</div></div>
+      <div class="node k"><div class="dot"></div><div class="d">๒๓ มิ.ย.</div><div class="n">ศ.ดร.จำรัส<br>ลิ้มตระกูล</div><div class="r">๑๔.๐๐–๑๖.๐๐</div></div>
+      <div class="node k"><div class="dot"></div><div class="d">๒๔ มิ.ย.</div><div class="n">ศ.ดร.วรภัทร<br>โตธนะเกษม</div><div class="r">๑๐.๐๐–๑๒.๐๐</div></div>
+      <div class="node k"><div class="dot"></div><div class="d">๒๕ มิ.ย.</div><div class="n">ดร.ทวินโชค<br>ตันธุวนิตย์</div><div class="r">๑๐.๐๐–๑๒.๐๐</div></div>
+    </div>
+    <div class="cap"><b>รูปที่ ๑</b> · กำหนดการเข้าหารือผู้ทรงคุณวุฒิ ระหว่าง ๘–๒๕ มิถุนายน ๒๕๖๙</div>
+  </div>
+
+  <table>
+    <thead><tr><th style="width:33%">ผู้ทรงคุณวุฒิ</th><th>บทบาท / ความเชี่ยวชาญ</th></tr></thead>
+    <tbody>
+      <tr><td><span class="who">รศ.ยืน ภู่วรวรรณ</span></td><td>ผู้ทรงคุณวุฒิและปูชนียบุคคลด้านเทคโนโลยีสารสนเทศของประเทศไทย — มุมมองเชิงประวัติศาสตร์และทิศทางการพัฒนา AI/หุ่นยนต์เชิงประยุกต์</td></tr>
+      <tr><td><span class="who">ศ.ดร.จำรัส ลิ้มตระกูล</span></td><td>ที่ปรึกษาสภามหาวิทยาลัยแม่ฟ้าหลวง ด้านนโยบายและยุทธศาสตร์เพื่อการพัฒนามหาวิทยาลัย — ประสบการณ์บริหารสถาบันวิจัยชั้นนำ (VISTEC)</td></tr>
+      <tr><td><span class="who">ศ.ดร.วรภัทร โตธนะเกษม</span></td><td>ที่ปรึกษาสภามหาวิทยาลัยแม่ฟ้าหลวง ด้านนโยบายและยุทธศาสตร์เพื่อการพัฒนามหาวิทยาลัย — มุมมองด้านการบริหาร การเงิน และการสร้างมูลค่า</td></tr>
+      <tr><td><span class="who">ดร.ทวินโชค ตันธุวนิตย์</span></td><td>Executive Director / President บริษัท Regional Container Lines (RCL) — มุมมองภาคอุตสาหกรรมและการนำเทคโนโลยีไปใช้จริงในธุรกิจ</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-h" style="margin-top:12px;"><div class="no">๒</div><div><h2>สาระสำคัญที่นำเสนอต่อผู้ทรงคุณวุฒิ</h2><div class="en">WHAT WAS PRESENTED</div></div></div>
+  <p class="small">คณะผู้บริหารได้นำเสนอแนวคิดการจัดตั้งศูนย์ ARIC โดยมีสาระหลักดังนี้ —
+  <strong>วิสัยทัศน์:</strong> เป็นศูนย์กลางด้าน AI และหุ่นยนต์ของภาคเหนือตอนบนที่เชื่อมโยงงานวิจัย การศึกษา และอุตสาหกรรม ·
+  <strong>พันธกิจ ๔ เสาหลัก:</strong> วิจัยและพัฒนา / พัฒนากำลังคน / บริการวิชาการ / สร้างระบบนิเวศนวัตกรรม</p>
+
+  <div class="stats">
+    <div class="stat"><div class="big">15.7T</div><div class="lb">มูลค่าเศรษฐกิจ AI ต่อ GDP โลก ภายในปี ๒๐๓๐ (USD)</div><div class="src">PwC · GLOBAL AI STUDY</div></div>
+    <div class="stat"><div class="big">51%</div><div class="lb">ส่วนแบ่งของจีนในการติดตั้งหุ่นยนต์อุตสาหกรรมทั่วโลก</div><div class="src">IFR · WORLD ROBOTICS 2024</div></div>
+    <div class="stat"><div class="big">๐ แห่ง</div><div class="lb">สถาบันอุดมศึกษาในภาคเหนือตอนบนที่มีศูนย์เฉพาะทาง AI/Robotics</div><div class="src">INTERNAL SCAN · ๒๕๖๙</div></div>
+  </div>
+  <div class="cap small muted" style="text-align:center; margin-top:-2px;"><b>รูปที่ ๓</b> · เหตุผลความจำเป็นและโอกาสของมหาวิทยาลัย (Why Now)</div>
+</section>
+
+<!-- ===================== SEC 2 (stack) ===================== -->
+<section class="page" data-pg><span class="pgnum">๓</span>
+  <div class="kicker">ตำแหน่งทางยุทธศาสตร์ที่นำเสนอ · STRATEGIC POSITIONING</div>
+  <h3 style="font-size:17px; margin:4px 0;">“เราไม่สร้างมือกล — เราสร้างสมองที่ทำให้มือกลทำงานได้ในบริบทไทย”</h3>
+  <p class="small">การแข่งขันด้านฮาร์ดแวร์หุ่นยนต์ถูกครอบครองโดยห่วงโซ่อุปทานของจีนแล้ว ประเทศไทยจะไม่สามารถแข่งขันใน
+  “ชั้นกลไก” ได้ในกรอบเวลา ๕–๑๐ ปี แต่แต่ละบริบทอุตสาหกรรมไทยต้องการ “ชั้นการประยุกต์ใช้” ที่ยังว่างอยู่
+  — และนี่คือชั้นที่ไทยได้เปรียบเชิงบริบทมากที่สุด ศูนย์จึงวางตัวเป็น <strong>ผู้พัฒนาชั้นการประยุกต์ของ Physical AI</strong></p>
+
+  <div class="fig">
+    <div class="stackmsg">สถาปัตยกรรม Physical AI — มูลค่าที่แท้จริงอยู่ที่ชั้นบนสุด</div>
+    <div class="stack">
+      <div class="layer L4"><div class="lab">L4</div><div class="body"><b>ชั้นการประยุกต์และปัญญาเฉพาะบริบท</b><span>แบบจำลองเฉพาะโจทย์ · ขั้นตอนงาน · ข้อมูลภาษาและบริบท · นโยบายและกฎหมายไทย</span></div><div class="tag">ศูนย์ ARIC</div></div>
+      <div class="layer L3"><div class="lab">L3</div><div class="body"><b>การรับรู้ การวางแผน และการควบคุม</b><span>การมองเห็นด้วยคอมพิวเตอร์ · การนำทาง · โมเดลภาษา · การประมวลผลและจำลองระบบ</span></div><div class="tag">เทคโนโลยีโลก</div></div>
+      <div class="layer L2"><div class="lab">L2</div><div class="body"><b>เซนเซอร์ การประมวลผล และข้อมูล</b><span>กล้อง · เซนเซอร์วัดระยะ · หน่วยประมวลผล · คลาวด์ · สายข้อมูล</span></div><div class="tag">ผู้ผลิตระดับโลก</div></div>
+      <div class="layer L1"><div class="lab">L1</div><div class="body"><b>กลไกและการผลิต</b><span>หุ่นยนต์ · มอเตอร์ · แขนกล · โดรน · โครงสร้าง</span></div><div class="tag">จีน · ครองตลาด</div></div>
+    </div>
+    <div class="cap"><b>รูปที่ ๒</b> · ศูนย์มุ่งพัฒนาชั้นบนสุดที่รวมข้อมูล ภาษา กฎหมาย และบริบทของอุตสาหกรรมไทย ซึ่งเป็นชั้นที่ผู้เล่นต่างชาติสร้างให้ไม่ได้</div>
+  </div>
+
+  <p class="small"><strong>กลุ่มโจทย์ใช้งานที่นำเสนอ:</strong> (๑) เกษตรมูลค่าสูง เช่น กาแฟ ชา ลำไย · (๒) สุขภาพและผู้สูงอายุ ·
+  (๓) การท่องเที่ยวเชิงประสบการณ์ · (๔) โลจิสติกส์ลุ่มน้ำโขงและการขนส่งข้ามพรมแดน · (๕) ผู้ผลิตขนาดเล็ก
+  โดยโครงสร้างการดำเนินงานแบ่งเป็น <strong>๔ กลุ่มงานหลัก</strong> ที่บูรณาการเป็นระบบเดียว ได้แก่ วิจัย การศึกษา นวัตกรรม และความร่วมมือ
+  พร้อมเสนอกรอบงบประมาณระยะ ๕ ปี แบบลงทุนในปีแรกและดำเนินงานต่อเนื่อง</p>
+
+  <div class="lede small"><strong>ข้อสังเกต:</strong> ตำแหน่งยุทธศาสตร์ด้านชั้นการประยุกต์ที่นำเสนอนี้
+  สอดคล้องอย่างยิ่งกับข้อเสนอแนะที่ผู้ทรงคุณวุฒิให้ในภายหลัง กล่าวคือให้เน้นการพัฒนาในระดับการประยุกต์และนวัตกรรม
+  และรับโจทย์จากภาคอุตสาหกรรมมาพัฒนา ซึ่งเป็นการยืนยันความถูกต้องของทิศทางหลักของศูนย์</div>
+</section>
+
+<!-- ===================== SEC 3 advisor opinions ===================== -->
+<section class="page" data-pg><span class="pgnum">๔</span>
+  <div class="sec-h"><div class="no">๓</div><div><h2>สรุปความเห็นของผู้ทรงคุณวุฒิรายท่าน</h2><div class="en">ADVISORS' KEY VIEWS</div></div></div>
+
+  <table>
+    <thead><tr><th style="width:22%">ผู้ทรงคุณวุฒิ</th><th style="width:39%">ประเด็น/คำถามสำคัญ</th><th>ข้อเสนอแนะเด่น</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="who">รศ.ยืน<br>ภู่วรวรรณ</span></td>
+        <td>ศูนย์ควรทำอะไรให้ชัด? เน้นหุ่นยนต์เชิงประยุกต์เพื่อเกษตร/ท่องเที่ยว/การแพทย์หรือไม่? ผลิตภัณฑ์ราคาจับต้องได้กับกลุ่มเป้าหมายหรือไม่? จะทำให้คนรู้จักศูนย์เร็วได้อย่างไร?</td>
+        <td>มองศูนย์เป็นส่วนหนึ่งของงานด้านเทคโนโลยีดิจิทัล · <strong>รับโจทย์จากภาคอุตสาหกรรมมาพัฒนาอุปกรณ์ แล้วส่งมอบให้นำกลับไปผลิตจริง</strong> · ใช้ข้อมูลเชิงพื้นที่ เช่น ภัยพิบัติในเชียงราย เป็นโครงการนำร่อง · หาทีมอาจารย์ผู้เชี่ยวชาญจริง ๓–๕ คน และสร้างนักวิจัยรุ่นใหม่ผ่านทุนการศึกษา</td>
+      </tr>
+      <tr>
+        <td><span class="who">ศ.ดร.จำรัส<br>ลิ้มตระกูล</span></td>
+        <td>จุดแข็งและจุดเน้นหลักของศูนย์คือด้านใด? เทคโนโลยีใดควรลงทุนก่อน? งานวิจัยที่มีต่อยอดเป็นผลิตภัณฑ์หรือสิทธิบัตรได้หรือไม่? วัดความสำเร็จด้วยตัวชี้วัดใด?</td>
+        <td>กำหนดกลุ่มเทคโนโลยีให้ชัดเพื่อสร้างเอกลักษณ์ · สร้าง <strong>ระบบนิเวศกำลังคน</strong> และห้องปฏิบัติการกลาง · ผลักงานวิจัยสู่ทรัพย์สินทางปัญญา ผลิตภัณฑ์ และธุรกิจแยกส่วน · กำหนดตัวชี้วัดที่ชัดเจน · ยึดแนวคิด <strong>“จากงานวิจัยแนวหน้าสู่นวัตกรรมที่ยั่งยืน”</strong> · สถาบัน VISTEC ยินดีให้ความช่วยเหลือ</td>
+      </tr>
+      <tr>
+        <td><span class="who">ศ.ดร.วรภัทร<br>โตธนะเกษม</span></td>
+        <td>เป้าหมายจำนวนธุรกิจเกิดใหม่ นักศึกษา และโครงการคิดจากอะไร? แผนสร้างรายได้และการต่อยอดเชิงพาณิชย์? ความพร้อมบุคลากร? ตั้งเป้าหมายใหญ่แค่ไหน? แผนรับมือความเสี่ยง?</td>
+        <td>ทำให้ทีมเชื่อไปในทิศทางเดียวกันก่อน · <strong>สร้างผลงานระยะสั้นที่จับต้องได้ให้เร็วที่สุดภายใน ๑–๒ ปี</strong> · มีแผนรับมือความเสี่ยงด้านงบประมาณ บุคลากร และผลงาน เพื่อตอบสภาได้ · ระบุผลผลิตและผลลัพธ์ที่ให้คำมั่นได้ทั้งระยะสั้น กลาง และยาว · จัดลำดับความสำคัญให้ดี</td>
+      </tr>
+      <tr>
+        <td><span class="who">ดร.ทวินโชค<br>ตันธุวนิตย์</span></td>
+        <td>ตั้งใจสร้างคนแบบใด? หลักสูตรทำให้ผู้เรียนมีทักษะอะไร? ทำอย่างไรให้ตามเทคโนโลยีทัน? เทคเปลี่ยนทุก ๖ เดือน แต่สร้างศูนย์ ๔ ปี วงรอบช้าไปหรือไม่?</td>
+        <td>สร้างคนที่มี <strong>ความเชี่ยวชาญเฉพาะทางและใช้เครื่องมือปัญญาประดิษฐ์เป็น</strong> ตัดสินใจและแก้ปัญหาได้ · ศูนย์ควร <strong>ทำหน้าที่เสมือนที่ปรึกษา</strong> ให้ภาคเอกชน · สร้างผลงานแก้ปัญหานำเพื่อสร้างชื่อ · มุ่งสนับสนุนผู้ประกอบการไทย · นำโจทย์จริงจากอุตสาหกรรมมาเรียนรู้ · สร้างแบรนด์ให้น่าเชื่อถือ</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="quote" style="margin-top:8px;">“งานวิจัยควรเป็นงานที่ใช้ได้จริง แก้ปัญหาจริง … ไม่ควรมุ่งเน้นการตีพิมพ์อย่างเดียวโดยไม่คิดการใช้ประโยชน์
+  ให้มุ่งเน้นงานที่ใช้ประโยชน์ได้จริง ผลิตภัณฑ์ที่ขายได้ เพื่อให้มีรายได้”
+  <small>— ข้อเสนอแนะร่วมด้านทิศทางงานวิจัย</small></div>
+</section>
+
+<!-- ===================== SEC 4 synthesis ===================== -->
+<section class="page" data-pg><span class="pgnum">๕</span>
+  <div class="sec-h"><div class="no">๔</div><div><h2>การสังเคราะห์ข้อเสนอแนะเป็น ๘ ประเด็น</h2><div class="en">SYNTHESIS OF ADVICE</div></div></div>
+  <p class="small muted" style="margin-top:0;">ข้อเสนอแนะของผู้ทรงคุณวุฒิทั้ง ๔ ท่าน จัดกลุ่มได้เป็น ๘ ประเด็นหลัก แต่ละประเด็นแสดงคู่กับแนวทางที่ศูนย์ปรับปรุงเพื่อรองรับ (รูปที่ ๔)</p>
+
+  <div class="theme"><div class="adv"><b>๑ · เลือกจุดยืนให้ชัดเจน</b> — กำหนดจุดเน้นหลักและกลุ่มเทคโนโลยีให้ชัด ไม่กระจายทรัพยากร</div><div class="resp"><b>แนวทางศูนย์:</b> เลือก <strong>“สุขภาพและสังคมสูงวัย”</strong> เป็นจุดเน้นหลัก บนบทบาทการพัฒนาชั้นการประยุกต์ เพื่อสร้างเอกลักษณ์และภาพจำ</div></div>
+
+  <div class="theme"><div class="adv"><b>๒ · เน้นชั้นการประยุกต์ ไม่ใช่ฮาร์ดแวร์</b> — รับโจทย์อุตสาหกรรมมาพัฒนา แล้วส่งมอบให้ผลิตจริง</div><div class="resp"><b>แนวทางศูนย์:</b> ตรงกับบทบาทหลักของศูนย์ (ชั้นบนสุด) คือนำหุ่นยนต์และแบบจำลองสำเร็จรูปมาปรับใช้กับโจทย์จริงของไทย</div></div>
+
+  <div class="theme"><div class="adv"><b>๓ · สร้างผลงานระยะสั้นให้เร็ว</b> — ผลงานจับต้องได้ภายใน ๑–๒ ปี เพื่อพิสูจน์ตัวเอง</div><div class="resp"><b>แนวทางศูนย์:</b> กำหนดโครงการนำร่อง ๒–๓ โครงการจากทรัพยากรที่มี และเผยแพร่ผลภายใน ๑๘–๒๔ เดือน</div></div>
+
+  <div class="theme"><div class="adv"><b>๔ · วิจัยที่ใช้ได้จริงและต่อยอดเชิงพาณิชย์</b> — มุ่งผลิตภัณฑ์ สิทธิบัตร และรายได้ ไม่ใช่แค่ตีพิมพ์</div><div class="resp"><b>แนวทางศูนย์:</b> วางกลไกจากต้นแบบไปสู่ทรัพย์สินทางปัญญา การถ่ายทอดเทคโนโลยี และการแยกตัวเป็นธุรกิจ พร้อมตัวชี้วัดด้านรายได้</div></div>
+
+  <div class="theme"><div class="adv"><b>๕ · สร้างระบบนิเวศกำลังคน</b> — หาผู้เชี่ยวชาญตัวจริง ๓–๕ คน และสร้างนักวิจัยผ่านทุนการศึกษา</div><div class="resp"><b>แนวทางศูนย์:</b> วางแผนกำลังคนต่อเนื่อง ร่วมมือกับ VISTEC ด้านสหกิจศึกษาและการฝึกงาน พร้อมระบบแรงจูงใจกระตุ้นผลงาน</div></div>
+
+  <div class="theme"><div class="adv"><b>๖ · เชื่อมอุตสาหกรรมและทำหน้าที่ที่ปรึกษา</b> — นำโจทย์จริงมาพัฒนา และสนับสนุนผู้ประกอบการไทย</div><div class="resp"><b>แนวทางศูนย์:</b> ให้บริการที่ปรึกษาด้านปัญญาประดิษฐ์และหุ่นยนต์แก่ผู้ประกอบการและภาครัฐ พร้อมเครือข่ายพันธมิตร เช่น RCL</div></div>
+
+  <div class="theme"><div class="adv"><b>๗ · บริหารคล่องตัว มีแรงจูงใจ และตัวชี้วัดชัด</b> — ให้ความคล่องตัวในการบริหาร การแข่งขันมีรางวัล</div><div class="resp"><b>แนวทางศูนย์:</b> ออกแบบโครงสร้างบริหารที่ยืดหยุ่น พร้อมชุดตัวชี้วัดด้านผลงาน สิทธิบัตร ทุนวิจัย โครงการอุตสาหกรรม รายได้ และผลกระทบ</div></div>
+
+  <div class="theme"><div class="adv"><b>๘ · งบประมาณและการสนับสนุนของผู้บริหาร</b> — ระดมทุนเป็นระยะ และผู้บริหารต้องเห็นชอบร่วมกัน</div><div class="resp"><b>แนวทางศูนย์:</b> วางแผนระดมทุนหลายแหล่งเป็นระยะ และเสนอรายงานฉบับนี้เพื่อขอความเห็นชอบในหลักการจากสภามหาวิทยาลัย</div></div>
+
+  <div class="cap small muted" style="text-align:center; margin-bottom:6px;"><b>รูปที่ ๔</b> · การสังเคราะห์ข้อเสนอแนะสู่แนวทางการปรับปรุงของศูนย์ ARIC</div>
+
+  <div class="sec-h" style="margin-top:10px;"><div class="no" style="background:var(--accent2)">฿</div><div><h3 style="font-size:16px;">แนวทางการหารายได้ของศูนย์</h3><div class="en">REVENUE MODEL · ตอบข้อหารือ ศ.ดร.วรภัทร โตธนะเกษม</div></div></div>
+  <p class="small" style="margin-top:2px;">ศ.ดร.วรภัทร ตั้งคำถามถึงแผนสร้างรายได้ การต่อยอดเชิงพาณิชย์ และความคุ้มค่าที่จะสื่อสารต่อสภามหาวิทยาลัย
+  ศูนย์จึงออกแบบแหล่งรายได้ <strong>๖ ทาง</strong> ที่เติบโตเป็นระยะ เพื่อค่อย ๆ ลดการพึ่งพางบประมาณภาครัฐ และมุ่งสู่การเลี้ยงตัวเองได้ในระยะยาว</p>
+
+  <div class="revgrid">
+    <div class="rev"><span class="ph ph-e">ระยะสั้น</span><div class="rn">๑</div><b>หลักสูตรอบรมและประกาศนียบัตร</b><span>หลักสูตรระยะสั้น การอบรมเข้มข้น และประกาศนียบัตรวิชาชีพด้านปัญญาประดิษฐ์และหุ่นยนต์ให้บุคคลทั่วไปและองค์กร</span></div>
+    <div class="rev"><span class="ph ph-e">ระยะสั้น</span><div class="rn">๒</div><b>บริการที่ปรึกษาและพัฒนาต้นแบบ</b><span>ให้คำปรึกษาและพัฒนาต้นแบบเทคโนโลยีแก่ผู้ประกอบการ ภาครัฐ และวิสาหกิจขนาดกลางและย่อม</span></div>
+    <div class="rev"><span class="ph ph-e">ระยะสั้น</span><div class="rn">๓</div><b>โครงการวิจัยร่วมกับภาคเอกชน</b><span>รับทำวิจัยตามโจทย์ของอุตสาหกรรม และร่วมพัฒนาเทคโนโลยีภายใต้สัญญาความร่วมมือ</span></div>
+    <div class="rev"><span class="ph ph-l">ระยะยาว</span><div class="rn">๔</div><b>การถ่ายทอดเทคโนโลยีและอนุญาตใช้สิทธิ</b><span>สร้างรายได้จากทรัพย์สินทางปัญญา ผ่านการอนุญาตให้ใช้สิทธิและถ่ายทอดเทคโนโลยีสู่ภาคการผลิต</span></div>
+    <div class="rev"><span class="ph ph-l">ระยะยาว</span><div class="rn">๕</div><b>ธุรกิจแยกส่วนและการร่วมลงทุน</b><span>ต่อยอดผลงานเป็นธุรกิจเกิดใหม่ที่ศูนย์และมหาวิทยาลัยถือหุ้นหรือร่วมลงทุน</span></div>
+    <div class="rev"><span class="ph ph-l">ระยะยาว</span><div class="rn">๖</div><b>บริการโครงสร้างพื้นฐานและการทดสอบ</b><span>ให้บริการหน่วยประมวลผลสมรรถนะสูง ห้องปฏิบัติการ และการทดสอบต้นแบบแก่หน่วยงานภายนอก</span></div>
+  </div>
+
+  <div class="revnote"><strong>จังหวะการเติบโตของรายได้:</strong> ระยะแรก (ปีที่ ๑–๓) พึ่งพารายได้จากการอบรมและบริการที่ปรึกษาเป็นหลัก
+  ซึ่งเริ่มได้เร็วจากทรัพยากรที่มี · ระยะหลัง (ปีที่ ๔–๕) เพิ่มสัดส่วนรายได้จากการอนุญาตใช้สิทธิ ธุรกิจแยกส่วน และโครงการวิจัยขนาดใหญ่
+  ทำให้ศูนย์มีความคุ้มค่าที่ชัดเจนต่อการลงทุนของมหาวิทยาลัย และลดการพึ่งพางบประมาณแผ่นดินลงตามลำดับ</div>
+</section>
+
+<!-- ===================== SEC 5 refined direction + risk ===================== -->
+<section class="page" data-pg><span class="pgnum">๖</span>
+  <div class="sec-h"><div class="no">๕</div><div><h2>ทิศทางที่ปรับปรุงแล้ว และการบริหารความเสี่ยง</h2><div class="en">REFINED DIRECTION &amp; RISK</div></div></div>
+
+  <div class="flag">
+    <h4>จุดเน้นหลัก · “สุขภาพและสังคมสูงวัย”</h4>
+    <p class="small" style="margin:4px 0 0;">จากข้อเสนอแนะให้เลือกโดเมนที่ชัดเจน ศูนย์เลือกสุขภาพและสังคมสูงวัยเป็นตัวชูโรง โดยอาศัยความได้เปรียบของมหาวิทยาลัย
+    ที่มีระบบนิเวศด้านวิทยาศาสตร์สุขภาพครบถ้วน ทั้งสำนักวิชาแพทยศาสตร์ พยาบาลศาสตร์ วิทยาศาสตร์สุขภาพ และโรงพยาบาลของมหาวิทยาลัย
+    ตัวอย่างการประยุกต์ เช่น ผู้ช่วยดูแลผู้สูงอายุที่สื่อสารด้วยภาษาไทยและภาษาถิ่น การตรวจจับการล้ม และการปฏิบัติตามระเบียบทางการแพทย์ของไทย</p>
+  </div>
+
+  <div class="kicker">โครงสร้าง ๔ กลุ่มงานหลัก และกำลังคน</div>
+  <div class="hubs">
+    <div class="hub"><b>กลุ่มงานวิจัย</b><br><span>วิจัยประยุกต์ด้านสุขภาพ การเกษตร เมืองอัจฉริยะ และภาษาในอนุภูมิภาคลุ่มน้ำโขง</span></div>
+    <div class="hub"><b>กลุ่มงานการศึกษา</b><br><span>หลักสูตรระดับปริญญา การอบรมเข้มข้น และการเรียนรู้จากโจทย์จริง</span></div>
+    <div class="hub"><b>กลุ่มงานนวัตกรรม</b><br><span>บ่มเพาะธุรกิจเกิดใหม่ ถ่ายทอดเทคโนโลยี และให้คำปรึกษาแก่ผู้ประกอบการ</span></div>
+    <div class="hub"><b>กลุ่มงานความร่วมมือ</b><br><span>เครือข่ายประเทศเพื่อนบ้าน แลกเปลี่ยนนักวิจัย และการจับคู่ธุรกิจ</span></div>
+  </div>
+  <p class="small"><strong>แผนกำลังคน:</strong> สรรหาผู้เชี่ยวชาญแกนหลัก ๓–๕ คน ควบคู่กับการสร้างนักวิจัยรุ่นใหม่ผ่านทุนการศึกษา
+  ที่ผูกพันให้กลับมาปฏิบัติงาน และความร่วมมือรับนักศึกษาสหกิจกับ VISTEC พร้อมระบบสร้างแรงจูงใจให้บุคลากรมุ่งสร้างผลงาน</p>
+
+  <div class="kicker" style="margin-top:6px;">ผลงานระยะสั้น · เริ่มจากโจทย์จริงของโรงพยาบาลและศูนย์ส่งเสริมสุขภาพ</div>
+  <p class="small" style="margin:2px 0 4px;">ศูนย์จะสร้างผลงานเร็วโดยต่อยอดจาก <strong>โจทย์จริงที่รวบรวมไว้แล้ว</strong> จากบุคลากรทางการแพทย์และการดูแลผู้สูงอายุ ตัวอย่างสำคัญ ๒ โจทย์ ได้แก่</p>
+  <div class="win" style="grid-template-columns:1fr 1fr;">
+    <div class="w"><div class="yr">โจทย์ที่ ๑ · การติดตามผู้ป่วย</div><b>ผู้ป่วยขาดการติดตามหลังกลับบ้าน</b><span>ผู้ป่วยและผู้สูงอายุจำนวนมากขาดการติดตามอาการต่อเนื่องเมื่อกลับไปพักฟื้นที่บ้าน ขณะที่บุคลากรมีภาระงานสูง — แก้ด้วยผู้ช่วยสนทนาด้วยเสียงภาษาไทย/ภาษาถิ่น ที่ติดตามอาการ ประเมินความเสี่ยง และแจ้งเตือนทีมพยาบาลเมื่อพบสัญญาณผิดปกติ</span></div>
+    <div class="w"><div class="yr">โจทย์ที่ ๒ · ผู้สูงอายุอยู่ลำพัง</div><b>ความเหงาและความเสี่ยงพลัดตกหกล้ม</b><span>ผู้สูงอายุที่อยู่ลำพังเสี่ยงต่อภาวะซึมเศร้าและการพลัดตกหกล้มโดยไม่มีผู้พบเห็น — แก้ด้วยระบบเสียงและการมองเห็นที่พูดคุยดูแลจิตใจ ตรวจจับการล้ม และเชื่อมต่อขอความช่วยเหลืออัตโนมัติ</span></div>
+  </div>
+  <p class="small muted" style="margin:2px 0 4px;">เส้นทางการต่อยอดผลงาน:</p>
+  <div class="win">
+    <div class="w"><div class="yr">ปีที่ ๑ (ระยะสั้น)</div><b>ต้นแบบใช้งานจริง</b><span>พัฒนาโจทย์ข้างต้นเป็นต้นแบบ ๑–๒ ชิ้น ทดสอบร่วมกับโรงพยาบาล และเผยแพร่เพื่อสร้างการรับรู้</span></div>
+    <div class="w"><div class="yr">ปีที่ ๒–๓ (ระยะกลาง)</div><b>บริการนำร่องและทรัพย์สินทางปัญญา</b><span>นำต้นแบบไปใช้จริงกับผู้ป่วยและผู้สูงอายุ พร้อมยื่นอนุสิทธิบัตรหรือสิทธิบัตรชิ้นแรก</span></div>
+    <div class="w"><div class="yr">ปีที่ ๔–๕ (ระยะยาว)</div><b>ธุรกิจแยกส่วนและรายได้</b><span>ขยายสู่บริการหรือสตาร์ทอัพที่สร้างรายได้ และเกิดผลกระทบเชิงเศรษฐกิจและสังคมที่วัดได้</span></div>
+  </div>
+  <div class="revnote" style="border-left-color:var(--health);"><strong>ผลงานระยะสั้นด้านการประชาสัมพันธ์:</strong> การลงนามความร่วมมือกับพันธมิตรผู้ผลิตในจีน (ร่วมวิจัย ร่วมผลิต และจำหน่าย)
+  ถือเป็นผลงานระยะสั้นเชิงประชาสัมพันธ์ที่สร้างการรับรู้และภาพจำให้ศูนย์เป็นที่รู้จักได้อย่างรวดเร็ว ตอบข้อเสนอแนะที่ให้เร่งสร้างแบรนด์และทำให้สาธารณะรู้จักศูนย์โดยเร็ว</div>
+
+  <div class="kicker" style="margin-top:6px;">การบริหารความเสี่ยง (ตอบข้อกังวลของสภาฯ)</div>
+  <table>
+    <thead><tr><th style="width:34%">ความเสี่ยง</th><th>แนวทางรองรับ</th></tr></thead>
+    <tbody>
+      <tr><td>สรรหาบุคลากรได้ไม่ตามแผน</td><td>ใช้ทุนการศึกษาสร้างคนภายใน เครือข่ายสถาบันพันธมิตร และจ้างผู้เชี่ยวชาญเฉพาะโครงการ</td></tr>
+      <tr><td>ผลงานหรือโครงการไม่สำเร็จตามเป้า</td><td>เริ่มจากผลงานระยะสั้นที่ทำได้จริง ทบทวนเป็นระยะ และจัดลำดับความสำคัญให้ชัดเจน</td></tr>
+      <tr><td>งบประมาณไม่เป็นไปตามแผน</td><td>ระดมทุนหลายแหล่งเป็นระยะ ทั้งกระทรวงดิจิทัลฯ งบแผ่นดิน และภาคเอกชน เพื่อลดการพึ่งพาแหล่งเดียว</td></tr>
+      <tr><td>เทคโนโลยีเปลี่ยนเร็วกว่าวงรอบสร้างศูนย์</td><td>วางบทบาทที่ชั้นการประยุกต์ซึ่งปรับตามเทคโนโลยีฐานได้ และ Physical AI เป็นแนวโน้มระยะยาว</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== SEC 6 proposal + appendix ===================== -->
+<section class="page" data-pg><span class="pgnum">๗</span>
+  <div class="sec-h"><div class="no">๖</div><div><h2>ข้อเสนอเพื่อพิจารณา</h2><div class="en">PROPOSAL FOR CONSIDERATION</div></div></div>
+
+  <div class="propose">
+    <h3>เพื่อโปรดพิจารณาให้ความเห็นชอบในหลักการ</h3>
+    <ol>
+      <li><strong>เห็นชอบในหลักการ</strong>ให้จัดตั้งศูนย์นวัตกรรมปัญญาประดิษฐ์และหุ่นยนต์ (ARIC) ตามทิศทางที่ปรับปรุงแล้ว โดยมีสุขภาพและสังคมสูงวัยเป็นจุดเน้นหลัก</li>
+      <li><strong>มอบหมาย</strong>ให้สำนักวิชาเทคโนโลยีดิจิทัลประยุกต์จัดทำแผนดำเนินงานและงบประมาณโดยละเอียด พร้อมแผนกำลังคนและแผนสร้างผลงานระยะสั้น</li>
+      <li><strong>สนับสนุนแนวทางระดมทุนเป็นระยะ</strong> จากหลายแหล่ง ทั้งกระทรวงดิจิทัลฯ งบแผ่นดิน กระทรวง อว. และภาคเอกชน</li>
+      <li><strong>สนับสนุนการสร้างพันธมิตรเชิงพาณิชย์กับบริษัทผู้ผลิตในสาธารณรัฐประชาชนจีน</strong> เพื่อร่วมวิจัย ร่วมผลิต และนำผลิตภัณฑ์ออกสู่ตลาด โดยศูนย์รับผิดชอบชั้นการประยุกต์ (สมองของระบบ) และพันธมิตรจีนรับผิดชอบการผลิตฮาร์ดแวร์ เพื่อเร่งการต่อยอดเชิงพาณิชย์และการเข้าถึงตลาด</li>
+      <li><strong>รับทราบ</strong>เจตนารมณ์ความร่วมมือจากผู้ทรงคุณวุฒิ เช่น สถาบัน VISTEC ด้านการพัฒนาคน และบริษัท RCL ด้านโจทย์อุตสาหกรรม</li>
+    </ol>
+  </div>
+
+  <p class="small">ผลการหารือสะท้อนว่าการจัดตั้งศูนย์ ARIC เป็นก้าวเชิงยุทธศาสตร์ที่ผู้ทรงคุณวุฒิเห็นพ้องและพร้อมสนับสนุน
+  ทิศทางที่ปรับปรุงแล้วได้ตอบข้อเสนอแนะสำคัญครบทุกด้าน — ทั้งการเลือกจุดยืนที่คม การเน้นชั้นการประยุกต์
+  การสร้างผลงานเร็ว การมุ่งใช้ประโยชน์เชิงพาณิชย์ และการบริหารคน–เงิน–ความเสี่ยงอย่างเป็นระบบ</p>
+
+  <hr style="border:none; border-top:1px solid var(--line); margin:12px 0;">
+
+  <div class="kicker">ภาคผนวก · สรุปคำถาม–ข้อเสนอแนะสำคัญเพิ่มเติมรายท่าน</div>
+  <table>
+    <thead><tr><th style="width:22%">ผู้ทรงคุณวุฒิ</th><th>สาระเพิ่มเติม</th></tr></thead>
+    <tbody>
+      <tr><td><span class="who">รศ.ยืน ภู่วรวรรณ</span></td><td>เปรียบการเติบโตของปัญญาประดิษฐ์กับยุคกำเนิดไมโครโปรเซสเซอร์ · ยกตัวอย่างการเพิ่มมูลค่าอุปกรณ์ด้วยระบบอัตโนมัติ · เน้นสอนให้เข้าใจหลักการทำงานอย่างแท้จริง · แนวทางระดมทุนหลายแหล่งเป็นระยะ ทั้งกระทรวงดิจิทัลฯ งบแผ่นดิน และภาคเอกชน</td></tr>
+      <tr><td><span class="who">ศ.ดร.จำรัส ลิ้มตระกูล</span></td><td>เสนอกลุ่มเทคโนโลยีหลัก เช่น ปัญญาประดิษฐ์และการเรียนรู้ของเครื่อง หุ่นยนต์และระบบอัตโนมัติ การมองเห็นด้วยคอมพิวเตอร์ และเทคโนโลยีเพื่อเกษตร สุขภาพ และสิ่งแวดล้อมอัจฉริยะ · เสนอให้มีห้องปฏิบัติการและโครงสร้างพื้นฐานกลาง · ยึดกรอบ “ปัจจัยนำเข้าที่ดีนำสู่ผลลัพธ์ที่ดี” คือ คน ทรัพยากร และความคล่องตัวในการบริหาร</td></tr>
+      <tr><td><span class="who">ศ.ดร.วรภัทร โตธนะเกษม</span></td><td>เน้นการสร้างแรงจูงใจให้ทีมมองไปทิศทางเดียวกัน · ประเด็นความตึงระหว่างระบบราชการกับแนวทางนวัตกรรม · การสื่อสารความคุ้มค่าที่ดีที่สุดต่อสภามหาวิทยาลัย ทั้งด้านการบริหาร เครือข่าย และรายได้ในอนาคต</td></tr>
+      <tr><td><span class="who">ดร.ทวินโชค ตันธุวนิตย์</span></td><td>ปริญญายังสำคัญ แต่ประสบการณ์แก้ปัญหาสำคัญกว่า · อุตสาหกรรมต้องการคนที่มีทัศนคติและทักษะด้านเทคโนโลยีที่พร้อมทำงาน · ปัญญาประดิษฐ์คือเครื่องมือและหุ่นยนต์คืออุปกรณ์ สิ่งสำคัญคือช่วยธุรกิจได้อย่างไร · ต้องสร้างความมั่นใจให้ผู้บริหารรุ่นอาวุโสที่มีอำนาจตัดสินใจหันมาใช้เทคโนโลยี</td></tr>
+    </tbody>
+  </table>
+
+  <p class="small muted" style="margin-top:10px;">— จัดทำโดย สำนักวิชาเทคโนโลยีดิจิทัลประยุกต์ (School of Applied Digital Technology) มหาวิทยาลัยแม่ฟ้าหลวง · กรกฎาคม ๒๕๖๙ —</p>
+</section>
+
+</body>
+</html>
